@@ -23,4 +23,4 @@ final subtitle = GoogleFonts.poppins(
         fontSize: 20, color: dark, fontWeight: FontWeight.w500));
 final weatherInfo = GoogleFonts.poppins(
     textStyle: const TextStyle(
-        fontSize: 22, color: darkWithOpacity, fontWeight: FontWeight.w500));
+        fontSize: 18, color: darkWithOpacity, fontWeight: FontWeight.w500));

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:whether_app/models/weather_data_model.dart';
 import 'package:whether_app/util/constant.dart';
 
 class MainWeatherSection extends StatefulWidget {
-  const MainWeatherSection({super.key});
+  final WeatherModel weatherModel;
+  const MainWeatherSection({super.key, required this.weatherModel});
 
   @override
   State<MainWeatherSection> createState() => _MainWeatherSectionState();
@@ -25,7 +27,6 @@ class _MainWeatherSectionState extends State<MainWeatherSection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-     
       padding: const EdgeInsets.symmetric(horizontal: horPad, vertical: verPad),
       width: double.infinity,
       color: mainWrec,
@@ -35,11 +36,11 @@ class _MainWeatherSectionState extends State<MainWeatherSection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "30.0C",
+                "${widget.weatherModel.temprature}°C",
                 style: display,
               ),
               Text(
-                "Sunny",
+                widget.weatherModel.weatherCondition,
                 style: display,
               )
             ],
