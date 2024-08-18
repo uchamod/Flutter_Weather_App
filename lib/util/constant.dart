@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const double verPad = 10;
-const double horPad = 20;
+const double horPad = 10;
 
 const Color light = Color(0xffFAFAF9);
 const Color dark = Color(0xff172554);

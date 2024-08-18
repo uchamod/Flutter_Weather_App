@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:whether_app/models/weather_data_model.dart';
 import 'package:whether_app/pages/search_page.dart';
+import 'package:whether_app/provider/provider.dart';
 import 'package:whether_app/services/api_services.dart';
 import 'package:whether_app/services/lottie_service.dart';
 import 'package:whether_app/util/constant.dart';
@@ -68,20 +70,33 @@ class _HomepageState extends State<Homepage> {
                             icon: const Icon(
                               Icons.search,
                               size: 32,
-                              color: dark,
                             ),
                           ),
                           Text(
                             _weatherModel!.city,
-                            style: title,
+                            style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.dark_mode,
-                              size: 28,
-                              color: dark,
-                            ),
+                          //mode change button
+                          Consumer<ThemeProvider>(
+                            builder: (context, value, child) {
+                              return IconButton(
+                                onPressed: () {
+                                  Provider.of<ThemeProvider>(context,
+                                          listen: false)
+                                      .changeMode(
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark);
+                                },
+                                //mode icon
+                                icon: Icon(
+                                  Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Icons.dark_mode
+                                      : Icons.light_mode,
+                                  size: 28,
+                                ),
+                              );
+                            },
                           ),
                         ],
                       ),

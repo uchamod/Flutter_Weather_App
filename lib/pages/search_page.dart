@@ -67,21 +67,18 @@ class _SearchPageState extends State<SearchPage> {
                 padding: const EdgeInsets.symmetric(
                     horizontal: horPad, vertical: 10),
                 child: TextField(
-                  style: weatherInfo,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   controller: _searchController,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 15),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
-                      borderSide: const BorderSide(color: dark),
-                    ),
+                    border: const OutlineInputBorder(),
                     label: Text(
                       "City Name",
-                      style: weatherInfo.copyWith(fontSize: 16),
+                      style: Theme.of(context).textTheme.labelSmall,
                     ),
                   ),
-                  cursorColor: dark,
+                  //cursorColor: dark,
                   keyboardType: TextInputType.text,
                   onSubmitted: (value) {
                     fetchWeatherByCity(_searchController.text.trim());
