@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:lottie/lottie.dart';
 import 'package:whether_app/models/weather_data_model.dart';
 import 'package:whether_app/pages/homepage.dart';
 import 'package:whether_app/services/api_services.dart';
+import 'package:whether_app/services/lottie_service.dart';
 import 'package:whether_app/util/constant.dart';
 import 'package:whether_app/widgets/main_weather_section.dart';
 import 'package:whether_app/widgets/weather_info_card.dart';
@@ -24,9 +26,7 @@ class _SearchPageState extends State<SearchPage> {
   void fetchWeatherByCity(String city) async {
     try {
       final weather = await _services.getWeatherByCity(city);
-      if (weather == null) {
-        return;
-      }
+
       setState(() {
         _weather = weather;
       });
@@ -94,6 +94,19 @@ class _SearchPageState extends State<SearchPage> {
               _weather != null
                   ? Column(
                       children: [
+                        //lottie animation
+                        Center(
+                          child: Lottie.network(
+                            fit: BoxFit.contain,
+                            width: 350,
+                            height: 350,
+                            LottieFunction().getWeatherAnimation(
+                                condition: _weather!.weatherCondition),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         MainWeatherSection(weatherModel: _weather!),
                         const SizedBox(
                           height: 15,
@@ -101,9 +114,14 @@ class _SearchPageState extends State<SearchPage> {
                         WeatherInfoCard(weatherModel: _weather!)
                       ],
                     )
-                  : const SizedBox(
-                      height: 400,
-                    ),
+                  : Center(
+                      child: Text(
+                        "No result found",
+                        style: TextStyle(
+                          color: dark.withOpacity(0.3),
+                        ),
+                      ),
+                    )
             ],
           ),
         ),
